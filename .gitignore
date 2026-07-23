@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.idea/
+.vscode/
+*.log
+Thumbs.db
+*_original.png
