@@ -9,3 +9,4 @@ build/
 *.log
 Thumbs.db
 *_original.png
+*.pyc
