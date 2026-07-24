@@ -4,29 +4,27 @@ A little Windows side project by **Rana Almeshari**: a desktop app that can mark
 
 Built for tinkering and learning how software write protection behaves on Windows — **not** a hardware write-blocker, and not something to trust for real evidence work.
 
-## Screenshots
-
-![369box](screenshots/main.png)
 
 ## What it does
 
 - Lists removable / external drives (skips the system disk)
 - Turns disk read-only on/off (needs Admin)
-- Checks that a test write actually fails after enabling protection
+- Shows protection status in the UI, and after enabling runs a test write to check it actually blocked
 - Safely ejects the selected USB (Explorer eject)
-- MD5 / SHA-1 / SHA-256 (quick file hash or slower raw disk hash)
+- MD5 / SHA-1 / SHA-256 (file hash, or slower raw disk hash)
 - Basic case fields + an append-only log you can export
 
 ## Requirements
 
 - Windows 10/11
 - Python 3.10+
-- Run as Administrator if you want write protection to work
+- Administrator rights for write protection (it uses Windows disk/volume APIs that need elevation)
 
 ## Setup
 
+From the project root:
+
 ```powershell
-cd $env:USERPROFILE\Projects\369box
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
@@ -34,31 +32,40 @@ pip install -r requirements.txt
 
 ## Run
 
+From the project root:
+
 ```powershell
-cd $env:USERPROFILE\Projects\369box
 python main.py
 ```
 
 Or double-click `run.bat` (right-click → Run as administrator for write protection).
 
-**Tips:** close File Explorer windows on that drive before enabling protection. Raw disk hash on a big drive can take a long time.
+**Tips:** close File Explorer windows for that drive before enabling protection. Hashing a full USB can take a long time.
 
-## Heads-up
+## Known limitations
 
-Software read-only can fail or be bypassed. If Windows already touched the drive, or Explorer still has it open, results may surprise you. That’s kind of the point of poking at it.
+- Software read-only can fail or be bypassed — this is not a hardware write-blocker
+- Windows may already have touched the drive before protection is on
+- Explorer (or other apps) keeping the drive open can make protection look flaky
+- If something fails, the app shows an error/warning dialog and logs it — it shouldn’t silently pretend it worked
+- Raw disk hash on large drives is slow; file hash only covers file contents, not every disk byte
 
 ## Layout
 
 ```
 369box/
   main.py
+  run.bat
   box369/
     devices.py
     writeprotect.py
     hashing.py
+    eject.py
     audit.py
     case_meta.py
-    gui/
+    gui/                 # PyQt6 UI (main_window, dialogs, styles)
+    assets/
+  screenshots/
 ```
 
 ## Author
@@ -67,4 +74,4 @@ Rana Almeshari
 
 ## License
 
-Personal project — use at your own risk.
+No formal license yet — personal project, use at your own risk.
