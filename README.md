@@ -1,8 +1,6 @@
 # 369box
 
-A little Windows side project by **Rana Almeshari**: a desktop app that can mark a USB/external drive read-only, hash it, and keep a simple session log.
-
-Built for tinkering and learning how software write protection behaves on Windows — **not** a hardware write-blocker, and not something to trust for real evidence work.
+A little Windows side project by **Rana Almeshari**: a desktop app that can mark a USB/external drive read-only, hash it, and keep a simple session log.s
 
 
 ## What it does
