@@ -1,6 +1,6 @@
 # 369box
 
-A little Windows side project by **Rana Almeshari**: a desktop app that can mark a USB/external drive read-only, hash it, and keep a simple session log.s
+A little Windows side project by **Rana Almeshari**: a desktop app that can mark a USB/external drive read-only, hash it, and keep a simple session log
 
 
 ## What it does
